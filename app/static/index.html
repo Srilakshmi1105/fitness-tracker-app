@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fitness Tracker Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    input, button {
+      padding: 8px;
+      font-size: 16px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fitness Tracker Data Viewer</h1>
+
+  <label for="token">Enter Bearer Token:</label><br />
+  <input type="text" id="token" style="width: 60%;" placeholder="Paste your access token here" />
+  <button onclick="loadData()">Load Data</button>
+
+  <h2>Workouts</h2>
+  <table id="workouts-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Duration (minutes)</th>
+        <th>Calories Burned</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>Meals</h2>
+  <table id="meals-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Meal Type</th>
+        <th>Calories</th>
+        <th>Description</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>Weights</h2>
+  <table id="weights-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Weight (kg)</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+<script>
+  async function fetchWithAuth(url, token) {
+    const res = await fetch(url, {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) {
+      alert(`Error fetching ${url}: ${res.status} ${res.statusText}`);
+      return null;
+    }
+    return await res.json();
+  }
+
+  function populateTable(tableId, data, columns) {
+    const tbody = document.querySelector(`#${tableId} tbody`);
+    tbody.innerHTML = ''; // clear previous rows
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      columns.forEach(col => {
+        const td = document.createElement('td');
+        td.textContent = item[col] ?? '';
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    });
+  }
+
+  async function loadData() {
+    const token = document.getElementById('token').value.trim();
+    if (!token) {
+      alert('Please enter a Bearer token.');
+      return;
+    }
+
+    const baseUrl = 'http://127.0.0.1:8000'; // adjust if needed
+
+    // Fetch and show workouts
+    const workouts = await fetchWithAuth(`${baseUrl}/workouts`, token);
+    if (workouts) {
+      populateTable('workouts-table', workouts, ['id', 'workout_type', 'duration_minutes', 'calories_burned', 'date']);
+    }
+
+    // Fetch and show meals
+    const meals = await fetchWithAuth(`${baseUrl}/meals`, token);
+    if (meals) {
+      populateTable('meals-table', meals, ['id', 'meal_type', 'calories', 'description', 'date']);
+    }
+
+    // Fetch and show weights
+    const weights = await fetchWithAuth(`${baseUrl}/weights`, token);
+    if (weights) {
+      populateTable('weights-table', weights, ['id', 'weight_kg', 'date']);
+    }
+  }
+</script>
+</body>
+</html>
