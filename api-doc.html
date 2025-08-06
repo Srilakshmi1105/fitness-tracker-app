@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>API Documentation Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 40px;
+      background: white;
+      box-shadow: 0 0 8px #ccc;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    pre {
+      background: #eee;
+      padding: 8px;
+      overflow-x: auto;
+      max-height: 250px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>API Endpoints Summary</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Endpoint</th>
+      <th>Method</th>
+      <th>Request Body</th>
+      <th>Response Example</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/register</code></td>
+      <td>POST</td>
+      <td>
+        <pre>{
+  "email": "sweetykannepalli@gmail.com",
+  "password": "Sweety@1105"
+}</pre>
+      </td>
+      <td>
+        <pre>{
+  "msg": "User registered successfully"
+}</pre>
+      </td>
+      <td>Register a new user</td>
+    </tr>
+
+    <tr>
+      <td><code>/login</code></td>
+      <td>POST</td>
+      <td>
+        <pre>grant_type=password
+username=sweetykannepalli@gmail.com
+password=Sweety@1105
+scope=
+client_id=string
+client_secret=********</pre>
+      </td>
+      <td>
+        <pre>{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer"
+}</pre>
+      </td>
+      <td>User login to get bearer token</td>
+    </tr>
+
+    <tr>
+      <td><code>/workouts</code></td>
+      <td>POST</td>
+      <td>
+        <pre>{
+  "id": 1,
+  "workout_type": "Running",
+  "duration_minutes": 30,
+  "calories_burned": 300,
+  "date": "2025-08-06"
+}</pre>
+      </td>
+      <td>
+        <pre>{
+  "msg": "Workout added successfully",
+  "workout": {
+    "id": 1,
+    "workout_type": "Running",
+    "duration_minutes": 30,
+    "calories_burned": 300,
+    "date": "2025-08-06"
+  }
+}</pre>
+      </td>
+      <td>Add a workout entry</td>
+    </tr>
+
+    <tr>
+      <td><code>/meals</code></td>
+      <td>POST</td>
+      <td>
+        <pre>{
+  "id": 1,
+  "meal_type": "Lunch",
+  "calories": 600,
+  "description": "Chicken salad",
+  "date": "2025-08-06"
+}</pre>
+      </td>
+      <td>
+        <pre>{
+  "msg": "Meal logged successfully",
+  "meal": {
+    "id": 1,
+    "meal_type": "Lunch",
+    "calories": 600,
+    "description": "Chicken salad",
+    "date": "2025-08-06"
+  }
+}</pre>
+      </td>
+      <td>Log a meal</td>
+    </tr>
+
+    <tr>
+      <td><code>/weights</code></td>
+      <td>POST</td>
+      <td>
+        <pre>{
+  "id": 1,
+  "weight_kg": 70.5,
+  "date": "2025-08-06"
+}</pre>
+      </td>
+      <td>
+        <pre>{
+  "msg": "Weight logged successfully",
+  "weight": {
+    "id": 1,
+    "weight_kg": 70.5,
+    "date": "2025-08-06"
+  }
+}</pre>
+      </td>
+      <td>Log a weight entry</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
