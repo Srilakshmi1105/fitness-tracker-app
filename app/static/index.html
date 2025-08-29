@@ -4,27 +4,11 @@
   <meta charset="UTF-8" />
   <title>Fitness Tracker Viewer</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 30px;
-    }
-    input, button {
-      padding: 8px;
-      font-size: 16px;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-bottom: 30px;
-    }
-    th, td {
-      border: 1px solid #999;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #eee;
-    }
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    input, button { padding: 8px; font-size: 16px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+    th { background-color: #eee; }
   </style>
 </head>
 <body>
@@ -38,11 +22,7 @@
   <table id="workouts-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Duration (minutes)</th>
-        <th>Calories Burned</th>
-        <th>Date</th>
+        <th>ID</th><th>Type</th><th>Duration (minutes)</th><th>Calories Burned</th><th>Date</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -52,11 +32,7 @@
   <table id="meals-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Meal Type</th>
-        <th>Calories</th>
-        <th>Description</th>
-        <th>Date</th>
+        <th>ID</th><th>Meal Type</th><th>Calories</th><th>Description</th><th>Date</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -66,9 +42,7 @@
   <table id="weights-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Weight (kg)</th>
-        <th>Date</th>
+        <th>ID</th><th>Weight (kg)</th><th>Date</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -107,7 +81,7 @@
       return;
     }
 
-    const baseUrl = 'http://127.0.0.1:8000'; // adjust if needed
+    const baseUrl = 'http://127.0.0.1:8000';
 
     // Fetch and show workouts
     const workouts = await fetchWithAuth(`${baseUrl}/workouts`, token);
